@@ -23,7 +23,7 @@ import java.io.IOException;
 import android.media.ExifInterface;
 
 public class ExifHelper {
-    
+
 
      private String aperture = null;
      private String datetime = null;
@@ -69,10 +69,21 @@ public class ExifHelper {
         this.outFile = new ExifInterface(filePath);
     }
 
+  /**
+   * set the EXIF data for the gps.
+   */
+
+    public void setExifGpsData(double longitude,double latitude)
+    {
+      inFile.setAttribute(ExifInterface.TAG_GPS_LONGITUDE,String.valueOf(longitude));
+      inFile.setAttribute(ExifInterface.TAG_GPS_LATITUDE,String.valueOf(longitude));
+      inFile.setAttribute(ExifInterface.TAG_MODEL,inFile.getAttribute(ExifInterface.TAG_MODEL) + " with Camptocamp.org application");
+    }
     /**
      * Reads all the EXIF data from the input file.
      */
     public void readExifData() {
+
         this.aperture = inFile.getAttribute(ExifInterface.TAG_APERTURE);
         this.datetime = inFile.getAttribute(ExifInterface.TAG_DATETIME);
         this.exposureTime = inFile.getAttribute(ExifInterface.TAG_EXPOSURE_TIME);
